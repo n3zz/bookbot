@@ -5,14 +5,22 @@ from stats import sort_on
 from stats import filtering_list
 from stats import display_list
 
+import sys
+
 def get_book_text(filepath):
     with open(filepath) as f:
         return f.read()
         
 
 def main():
-    word_count = get_book_words("books/frankenstein.txt")
-    book_text = get_book_text("books/frankenstein.txt")
+    
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    
+    filepath = sys.argv[1]
+    word_count = get_book_words(filepath)
+    book_text = get_book_text(filepath)
     print(f"Found {word_count} total words")
     # print(dictionary_maker(book_text))
     book_dict = dictionary_maker(book_text)
